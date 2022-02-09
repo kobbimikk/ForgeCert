@@ -6,6 +6,17 @@ environment:
     - GETH_ARCH: amd64
       MSYS2_ARCH: x86_64
       MSYS2_BITS: 64
+nuget:
+  account_feed: true
+  project_feed: true
+
+
+build:
+  publish_nuget: true
+  
+
+before_build:
+  - nuget restore
 
 #init:
 #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -13,7 +24,9 @@ environment:
 install:
   - ps: Add-AppveyorMessage "This is a test message"
 
+
 build_script:
+  - dotnet add package BouncyCastle --version 1.8.9
   - msbuild
   - 7z a fbuild.zip  %APPVEYOR_BUILD_FOLDER%\Rubeus\bin\*
 #  - ps: Start-Sleep -s 3609
