@@ -26,7 +26,6 @@ install:
 
 
 build_script:
-  - dotnet add package BouncyCastle --version 1.8.9
   - msbuild
   - 7z a fbuild.zip  %APPVEYOR_BUILD_FOLDER%\Rubeus\bin\*
 #  - ps: Start-Sleep -s 3609
